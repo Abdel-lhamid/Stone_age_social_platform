@@ -40,41 +40,74 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
+    /**
+     * Get all users
+     * @return
+     */
     @PostMapping("/users")
     public ResponseEntity<ResponseObjectService> findAllUsers() {
         return new ResponseEntity<ResponseObjectService>(userService.findAll(), HttpStatus.OK);
     }
-
+    /**
+     * Get user by id
+     * @param inputId
+     * @return
+     */
     @PostMapping("/users/profile")
     public ResponseEntity<ResponseObjectService> findById(@RequestBody IdObjectEntity inputId) {
         return new ResponseEntity<ResponseObjectService>(userService.findById(inputId.getId()), HttpStatus.OK);
     }
+    /**
+     * Follow a user
+     * @param doubleId
+     * @return
+     */
 
     @PostMapping("/users/follow")
     public ResponseEntity<ResponseObjectService> followUser(@RequestBody DoubleIdObjectEntity doubleId) {
         return new ResponseEntity<ResponseObjectService>(userService.followUser(doubleId), HttpStatus.OK);
     }
-
+    /**
+     * Unfollow a user
+     * @param doubleId
+     * @return
+     */
     @PostMapping("/users/unfollow")
     public ResponseEntity<ResponseObjectService> unfollowUser(@RequestBody DoubleIdObjectEntity doubleId) {
         return new ResponseEntity<ResponseObjectService>(userService.unfollowUser(doubleId), HttpStatus.OK);
     }
-
+    /**
+     * Get users that the user is following
+     * @param inputId
+     * @return
+     */
     @PostMapping("/users/getfollowing")
     public ResponseEntity<ResponseObjectService> findFollowing(@RequestBody IdObjectEntity inputId) {
         return new ResponseEntity<ResponseObjectService>(userService.findFollowing(inputId.getId()), HttpStatus.OK);
     }
-
+    /**
+     * Get users that are following the user
+     * @param inputId
+     * @return
+     */
     @PostMapping("/users/getfollower")
     public ResponseEntity<ResponseObjectService> findFollower(@RequestBody IdObjectEntity inputId) {
         return new ResponseEntity<ResponseObjectService>(userService.findFollower(inputId.getId()), HttpStatus.OK);
     }
-
+    /**
+     * Save a user
+     * @param inputUser
+     * @return
+     */
     @PostMapping("/users/save")
     public ResponseEntity<ResponseObjectService> saveUser(@RequestBody UserEntity inputUser) {
         return new ResponseEntity<ResponseObjectService>(userService.saveUser(inputUser), HttpStatus.OK);
     }
-
+    /**
+     * Sign in a user
+     * @param inputUser
+     * @return
+     */
     @PostMapping("/users/signin")
     public ResponseEntity<ResponseObjectService> userSignIn(@RequestBody UserSignInEntity inputUser) {
         try {
@@ -89,12 +122,21 @@ public class UserController {
             return new ResponseEntity<ResponseObjectService>(new ResponseObjectService("fail", "unauthenticated", null), HttpStatus.OK);
         }
     }
+    /**
+     * Update a user
+     * @param inputUser
+     * @return
+     */
 
     @PutMapping("/users/update")
     public ResponseEntity<ResponseObjectService> update(@RequestBody UserEntity inputUser) {
         return new ResponseEntity<ResponseObjectService>(userService.update(inputUser), HttpStatus.OK);
     }
-
+    /**
+     * Delete a user
+     * @param inputId
+     * @return
+     */
     @GetMapping("/getdata")
     public ResponseEntity<String> testAfterLogin(Principal p) {
         return ResponseEntity.ok("Welcome. You are: " + p.getName());

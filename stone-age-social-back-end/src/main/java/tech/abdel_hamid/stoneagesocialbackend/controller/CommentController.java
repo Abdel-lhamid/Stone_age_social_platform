@@ -20,12 +20,22 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     * Insert a comment to a post
+     * @param postedComment
+     * @return
+     */
     @PostMapping("/insertcomment")
     public ResponseEntity<ResponseObjectService> insertComment(@RequestBody CommentPostRequestEntity postedComment) {
         CommentEntity inputComment = postedComment.getCommentEntity();
         IdObjectEntity inputPostId = postedComment.getPostId();
         return new ResponseEntity<ResponseObjectService>(commentService.insertComment(inputComment, inputPostId.getId()), HttpStatus.OK);
     }
+    /**
+     * Get comments of a post
+     * @param inputPostId
+     * @return
+     */
 
     @PostMapping("/getcomments") 
     public ResponseEntity<ResponseObjectService> getComments(@RequestBody IdObjectEntity inputPostId) {

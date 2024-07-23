@@ -20,16 +20,31 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    /**
+     * Insert a post
+     * @param inputPost
+     * @return
+     */
     @PostMapping("/insertpost")
     public ResponseEntity<ResponseObjectService> insertPost(@RequestBody PostEntity inputPost) {
         return new ResponseEntity<ResponseObjectService>(postService.insertPost(inputPost), HttpStatus.OK);
     }
-    
+
+    /**
+     * Get posts of a user
+     * @param inputUserId
+     * @return
+     */
     @PostMapping("/myposts")
     public ResponseEntity<ResponseObjectService> findPostByUserId(@RequestBody IdObjectEntity inputUserId) {
         return new ResponseEntity<ResponseObjectService>(postService.findPostByUserId(inputUserId), HttpStatus.OK);
     }
 
+    /**
+     *  Get posts of users that the user is following
+     * @param inputUserId
+     * @return
+     */
     @PostMapping("/followingposts")
     public ResponseEntity<ResponseObjectService> findPostByFollowing(@RequestBody IdObjectEntity inputUserId) {
         return new ResponseEntity<ResponseObjectService>(postService.findPostByFollowing(inputUserId), HttpStatus.OK);
@@ -41,11 +56,20 @@ public class PostController {
     //     return new ResponseEntity<ResponseObjectService>(postService.updatePostByComment(inputPost), HttpStatus.OK);
     // }
 
+    /**
+     * Update post by love
+     * @param doubleId
+     * @return
+     */
     @PostMapping("/lovepost")
     public ResponseEntity<ResponseObjectService> lovePost(@RequestBody DoubleIdObjectEntity doubleId) {
         return new ResponseEntity<ResponseObjectService>(postService.updatePostByLove(doubleId), HttpStatus.OK);
     }
-
+    /**
+     * Update post by share
+     * @param doubleId
+     * @return
+     */
     @PostMapping("/sharepost")
     public ResponseEntity<ResponseObjectService> sharePost(@RequestBody DoubleIdObjectEntity doubleId) {
         return new ResponseEntity<ResponseObjectService>(postService.updatePostByShare(doubleId), HttpStatus.OK);
